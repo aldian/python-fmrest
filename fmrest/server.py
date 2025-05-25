@@ -942,7 +942,8 @@ class Server(object):
         except json.decoder.JSONDecodeError as ex:
             print("RESPONSE STATUS CODE:", response.status_code, file=sys.stderr)
             print("RESPONSE TEXT:", response.text, file=sys.stderr)
-            raise BadJSON(ex, response) from None
+            raise Exception(f"WEIRD RESPONSE: {response.status_code} {response.text}")
+            #raise BadJSON(ex, response) from None
 
         fms_messages = response_data.get('messages')
         fms_response = response_data.get('response')

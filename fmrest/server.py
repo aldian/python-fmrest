@@ -2,6 +2,7 @@
 import json
 import importlib.util
 import warnings
+import sys
 from typing import List, Dict, Optional, Any, IO, Tuple, Union, Iterator
 from functools import wraps
 import requests
@@ -939,8 +940,8 @@ class Server(object):
         try:
             response_data = response.json()
         except json.decoder.JSONDecodeError as ex:
-            print("RESPONSE STATUS CODE:", response.status_code)
-            print("RESPONSE TEXT:", response.text)
+            print("RESPONSE STATUS CODE:", response.status_code, file=sys.stderr)
+            print("RESPONSE TEXT:", response.text, file=sys.stderr)
             raise BadJSON(ex, response) from None
 
         fms_messages = response_data.get('messages')

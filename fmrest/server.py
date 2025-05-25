@@ -939,6 +939,8 @@ class Server(object):
         try:
             response_data = response.json()
         except json.decoder.JSONDecodeError as ex:
+            print("RESPONSE STATUS CODE:", response.status_code)
+            print("RESPONSE TEXT:", response.text)
             raise BadJSON(ex, response) from None
 
         fms_messages = response_data.get('messages')
